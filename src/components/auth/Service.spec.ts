@@ -75,7 +75,7 @@ describe('AuthService', () => {
     });
 
     it('should not authenticate Customer (email not found)', async () => {
-      const emailNotExist = 'non-existing_email../../livehere.com.br';
+      const emailNotExist = 'non-existing_email@mail.com.br';
       const [login, error] = await mockedAuthService.authenticate(
         {
           email: emailNotExist,

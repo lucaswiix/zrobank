@@ -19,7 +19,7 @@ export const UNAUTHORIZED_USER = (): ApplicationError => ({
   code: ErrorCodes.USER_PREFIX + AuthErrorCode.UNAUTHORIZED_USER,
   type: 'UNAUTHORIZED_USER',
   message: 'Usuário inválido',
-  description: 'Customer is not authorized to access marketplace',
+  description: 'Customer is not authorized to access',
 });
 
 export const EMAIL_ALREADY_EXISTS = (): ApplicationError => ({
