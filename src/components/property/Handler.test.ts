@@ -1,10 +1,7 @@
-import axios from 'axios';
 import db from '../../sequelize/Sequelize';
-import { API_URL, DEFAULT_TIMEOUT } from '../../test/config';
-import { generateJWT } from '../auth/Security';
-import { createCustomerTokenData } from '../customer/Seed';
-import { PropertySampleData } from './Seed';
-
+import { createClientWithAuth } from '../../test/Utils';
+import { RatingSeed } from '../rating/Seed';
+import { PropertySampleData, PropertySeed } from './Seed';
 const ENDPOINT = '/api/v1/properties';
 describe('PropertyHandler', () => {
   describe('GET /', () => {
@@ -61,18 +58,55 @@ describe('PropertyHandler', () => {
       expect(data.success).toBe(false);
     });
   });
-});
 
-async function createClientWithAuth() {
-  const jwtToken = await generateJWT(createCustomerTokenData());
-  const axiosCreate = await axios.create({
-    baseURL: API_URL,
-    timeout: DEFAULT_TIMEOUT,
-    headers: {
-      Cookie: `zrobank_access_token_auth=${jwtToken}`,
-    },
-    validateStatus: () => true,
-    withCredentials: true,
+  describe('GET /:propertyKey/ratings', () => {
+    it('should return ratings by property key', async () => {
+      const axiosClient = await createClientWithAuth();
+      const { data } = await axiosClient.get(
+        `${ENDPOINT}/${PropertySeed.data[0].key}/ratings`
+      );
+
+      expect(data.error).toBeUndefined();
+      expect(data.results).toBeDefined();
+      expect(data.results.length).toBeGreaterThan(0);
+    });
+
+    it('should return ratings by property key with ', async () => {
+      const axiosClient = await createClientWithAuth();
+      const { data } = await axiosClient.get(`${ENDPOINT}/322/ratings`);
+
+      expect(data.error).toBeUndefined();
+      expect(data.results).toBeDefined();
+    });
   });
-  return axiosCreate;
-}
+
+  describe('POST /:propertyKey/ratings', () => {
+    it('should create rating to a property ', async () => {
+      const axiosClient = await createClientWithAuth();
+      const { data } = await axiosClient.post(
+        `${ENDPOINT}/${PropertySeed.data[0].key}/ratings`,
+        {
+          ...RatingSeed.data[0],
+          key: undefined,
+          rating: 4,
+          description: 'eae galera',
+        }
+      );
+
+      expect(data.error).toBeUndefined();
+      expect(data.success).toBe(true);
+    });
+
+    it('should failed create rating to property with invalid property', async () => {
+      const axiosClient = await createClientWithAuth();
+      const { data } = await axiosClient.post(`${ENDPOINT}/322/ratings`, {
+        ...RatingSeed.data[0],
+        rating: 4,
+        description: 4,
+      });
+
+      expect(data.error).toBeDefined();
+      expect(data.results).toBeUndefined();
+    });
+  });
+});

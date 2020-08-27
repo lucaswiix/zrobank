@@ -1,7 +1,7 @@
 import { ValidationError } from 'class-validator';
 
 export enum ErrorCodes {
-  USER_PREFIX = 100,
+  CUSTOMER_PREFIX = 100,
   PROPERTY_PREFIX = 200,
   RATING_PREFIX = 300,
 }

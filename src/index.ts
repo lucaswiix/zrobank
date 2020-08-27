@@ -6,12 +6,6 @@ const envConfigFilePath = path.resolve(
   '..',
   process.env.ENV_FILE_PATH || '.env'
 );
-const googleCloudKeyFilePath = path.resolve(
-  __dirname,
-  '..',
-  'credentials',
-  '4dbff50adff5.json'
-);
 
 (async () => {
   require('dotenv').config({ path: envConfigFilePath });

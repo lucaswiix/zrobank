@@ -2,14 +2,14 @@ import jwt from 'jwt-simple';
 import { BaseOptions } from '../../common/Types';
 import globalConfig from '../../config/GlobalConfig';
 import { ApplicationError } from '../../error/Types';
-import { INVALID_USER } from '../customer/Errors';
+import { INVALID_CUSTOMER } from '../customer/Errors';
 import { CustomerModel } from '../customer/Model';
 import { ICustomer } from '../customer/Types';
 import { validateCustomer } from '../customer/Validation';
 import {
   EMAIL_ALREADY_EXISTS,
   INVALID_LOGIN,
-  UNAUTHORIZED_USER,
+  UNAUTHORIZED_CUSTOMER,
 } from './Errors';
 import {
   comparePasswordHash,
@@ -89,7 +89,7 @@ export const AuthService = ({
     const [validatedData, err] = validateCustomer(data);
 
     if (err) {
-      return [undefined, INVALID_USER(err.fields)];
+      return [undefined, INVALID_CUSTOMER(err.fields)];
     }
 
     const isEmailExists = await userModel.count({
@@ -123,13 +123,13 @@ export const AuthService = ({
   ): Promise<[ICustomer, ApplicationError]> {
     const { ctx } = options || {};
     if (!token) {
-      return [undefined, UNAUTHORIZED_USER()];
+      return [undefined, UNAUTHORIZED_CUSTOMER()];
     }
     try {
       const payload = jwt.decode(token, globalConfig.USER_JWT_SECRET);
       const exp = Number(payload?.exp);
       if (isNaN(exp) || exp < new Date().getTime()) {
-        return [undefined, UNAUTHORIZED_USER()];
+        return [undefined, UNAUTHORIZED_CUSTOMER()];
       }
 
       const user = await userModel.findByPk(payload.user.key, {
@@ -137,12 +137,12 @@ export const AuthService = ({
       });
 
       if (!user) {
-        return [undefined, UNAUTHORIZED_USER()];
+        return [undefined, UNAUTHORIZED_CUSTOMER()];
       }
 
       return [user, undefined];
     } catch (err) {
-      return [undefined, UNAUTHORIZED_USER()];
+      return [undefined, UNAUTHORIZED_CUSTOMER()];
     }
   }
 };

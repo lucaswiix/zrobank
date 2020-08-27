@@ -59,7 +59,7 @@ describe('AuthService', () => {
       const [login, error] = await mockedAuthService.authenticate(
         {
           email: CustomerSeed.data[0].email,
-          password: 'abc123',
+          password,
         },
         { ctx }
       );
@@ -129,7 +129,7 @@ describe('AuthService', () => {
 
       expect(fnCreate).toBeCalledTimes(1);
       expect(Object.keys(fnCreate.mock.calls[0][0]).sort()).toMatchObject(
-        ['email', 'password', 'name', 'key'].sort()
+        ['email', 'password', 'name', 'key', 'latitude', 'longitude'].sort()
       );
     });
 
@@ -142,7 +142,7 @@ describe('AuthService', () => {
 
       expect(error).toBeDefined();
       expect(error.code).toBe(
-        ErrorCodes.USER_PREFIX + CustomerErrorCode.INVALID_USER
+        ErrorCodes.CUSTOMER_PREFIX + CustomerErrorCode.INVALID_CUSTOMER
       );
       expect(error.fields.some((field) => field.property === 'email')).toBe(
         true
@@ -159,7 +159,7 @@ describe('AuthService', () => {
 
       expect(error).toBeDefined();
       expect(error.code).toBe(
-        ErrorCodes.USER_PREFIX + CustomerErrorCode.INVALID_USER
+        ErrorCodes.CUSTOMER_PREFIX + CustomerErrorCode.INVALID_CUSTOMER
       );
       expect(error.fields.some((field) => field.property === 'password')).toBe(
         true
@@ -176,7 +176,7 @@ describe('AuthService', () => {
 
       expect(error).toBeDefined();
       expect(error.code).toBe(
-        ErrorCodes.USER_PREFIX + AuthErrorCode.USER_EMAIL_ALREADY_EXISTS
+        ErrorCodes.CUSTOMER_PREFIX + AuthErrorCode.CUSTOMER_EMAIL_ALREADY_EXISTS
       );
       expect(fnCount).toBeCalled();
       expect(fnCreate).not.toBeCalled();
@@ -223,7 +223,7 @@ describe('AuthService', () => {
       expect(error).toBeDefined();
       expect(fnFindByPk).toBeCalled();
       expect(error.code).toBe(
-        ErrorCodes.USER_PREFIX + AuthErrorCode.UNAUTHORIZED_USER
+        ErrorCodes.CUSTOMER_PREFIX + AuthErrorCode.UNAUTHORIZED_CUSTOMER
       );
     });
     it('should failed in the token verification because the time has expired', async () => {
@@ -245,7 +245,7 @@ describe('AuthService', () => {
       expect(error).toBeDefined();
       expect(fnFindByPk).not.toBeCalled();
       expect(error.code).toBe(
-        ErrorCodes.USER_PREFIX + AuthErrorCode.UNAUTHORIZED_USER
+        ErrorCodes.CUSTOMER_PREFIX + AuthErrorCode.UNAUTHORIZED_CUSTOMER
       );
     });
   });

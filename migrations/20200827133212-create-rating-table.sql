@@ -6,7 +6,7 @@ CREATE TABLE rating (
   property_key BIGSERIAL NOT NULL CONSTRAINT rating_property_fk REFERENCES property,
   rating SMALLINT NOT NULL,
   description TEXT,
-  created_by  BIGSERIAL NOT NULL CONSTRAINT rating_customer_fk REFERENCES customer,
+  customer_key  BIGSERIAL NOT NULL CONSTRAINT rating_customer_fk REFERENCES customer,
   created_at TIMESTAMP DEFAULT now() NOT NULL,
   updated_at TIMESTAMP DEFAULT now() NOT NULL
 );

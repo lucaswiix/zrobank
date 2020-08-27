@@ -21,15 +21,13 @@ export function initApp({ port = GlobalConfig.PORT } = {}) {
     app.use(helmet());
 
     app.get('/', (req, res) => res.status(200).send('ok'));
+
     app.use(optionsMiddleware);
     app.use(cacheMiddleware);
 
     app.use('/api/v1/auth', authHandler());
-    // app.use('/api/v1/users', userHandler());
 
     app.use('/api/v1/properties', propertyHandler());
-    // app.use('/api/v1/ratings', ratingHandler());
-
     app.use(errorHandler);
 
     app.listen(port, '0.0.0.0', () => {

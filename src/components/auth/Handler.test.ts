@@ -13,8 +13,10 @@ const axiosClient = axios.create({
 
 describe('AuthHandler', () => {
   describe('/register', () => {
-    it('should create a user sucessfully', async () => {
+    it('should create a customer sucessfully', async () => {
       const { data } = await axiosClient.post(`${ENDPOINT}/register`, {
+        ...CustomerSeed.data[0],
+        key: undefined,
         email: 'lucasrocha@zrobank.com',
         password: '12345678',
         name: 'lucas rocha',
@@ -24,8 +26,10 @@ describe('AuthHandler', () => {
       expect(data.success).toBe(true);
     });
 
-    it('should not create a user with invalid email', async () => {
+    it('should not create a customer with invalid email', async () => {
       const { data } = await axiosClient.post(`${ENDPOINT}/register`, {
+        ...CustomerSeed.data[0],
+        key: undefined,
         email: 'lucas rocha',
         password: '12345678',
         name: 'lucas rocha',
@@ -35,9 +39,11 @@ describe('AuthHandler', () => {
       expect(data.success).toBe(false);
     });
 
-    it('should not create a user with exist email', async () => {
+    it('should not create a customer with exist email', async () => {
       const { data } = await axiosClient.post(`${ENDPOINT}/register`, {
+        ...CustomerSeed.data[0],
         email: CustomerSeed.data[0],
+        key: undefined,
         password: '12345678',
         name: 'lucas rocha',
       });
@@ -48,7 +54,7 @@ describe('AuthHandler', () => {
   });
 
   describe('/login', () => {
-    it('should authenticate user sucessfully', async () => {
+    it('should authenticate customer sucessfully', async () => {
       const { data }: { data: ResponseAPI } = await axiosClient.post(
         `${ENDPOINT}/login`,
         {
@@ -63,7 +69,7 @@ describe('AuthHandler', () => {
       expect(data.success).toBe(true);
     });
 
-    it('should not authenticate user with invalid email', async () => {
+    it('should not authenticate customer with invalid email', async () => {
       const { data } = await axiosClient.post(`${ENDPOINT}/login`, {
         email: 'mailslucas@zrobank.com',
         password: 'abc123',
@@ -73,7 +79,7 @@ describe('AuthHandler', () => {
       expect(data.success).toBe(false);
     });
 
-    it('should not authenticate user with invalid password', async () => {
+    it('should not authenticate customer with invalid password', async () => {
       const { data } = await axiosClient.post(`${ENDPOINT}/login`, {
         email: CustomerSeed.data[0].email,
         password: '1234567',
