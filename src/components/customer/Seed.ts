@@ -8,6 +8,8 @@ export const CustomerSampleData: Partial<ICustomer> = {
   key: '1001',
   name: 'Lucas Wiix',
   email: 'lucas@zrobank.com.br',
+  latitude: -8.0278468,
+  longitude: -34.8982076,
   password:
     '$argon2i$v=19$m=4096,t=3,p=1$sRbYmlrX4Z309rc208C9vg$L1PniwtdfKfyYxBJHwWgk9Xu9ox/3ZYLnzKaJRif1ek',
 };
@@ -21,6 +23,7 @@ export const CustomerSeed: Seed<ICustomer> = {
     },
     {
       ...CustomerSampleData,
+      name: 'Pedro barreto',
       email: 'mailzrobank1@mail.com.br',
       key: generator.next().value || '',
     },

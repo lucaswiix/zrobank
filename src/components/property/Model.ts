@@ -1,5 +1,6 @@
 import {
   AutoIncrement,
+  BelongsTo,
   Column,
   CreatedAt,
   DataType,
@@ -8,35 +9,30 @@ import {
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
-import { ICustomer } from './Types';
+import { CustomerModel } from '../customer/Model';
+import { ICustomer } from '../customer/Types';
+import { IProperty } from './Types';
+
 @Table({
-  modelName: 'customer',
-  defaultScope: {
-    attributes: {
-      exclude: ['password'],
-    },
-  },
+  modelName: 'property',
 })
-export class CustomerModel extends Model<CustomerModel> implements ICustomer {
+export class PropertyModel extends Model<PropertyModel> implements IProperty {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.BIGINT)
   key: string;
 
   @Column(DataType.TEXT)
-  name: string;
-
-  @Column(DataType.TEXT)
-  email: string;
-
-  @Column(DataType.TEXT)
-  password: string;
+  title: string;
 
   @Column(DataType.DOUBLE)
   latitude: number;
 
   @Column(DataType.DOUBLE)
   longitude: number;
+
+  @Column(DataType.BIGINT)
+  customer_key: string;
 
   @CreatedAt
   @Column(DataType.TIME)
@@ -45,4 +41,7 @@ export class CustomerModel extends Model<CustomerModel> implements ICustomer {
   @UpdatedAt
   @Column(DataType.TIME)
   updated_at: string;
+
+  @BelongsTo(() => CustomerModel, 'customer_key')
+  customer: ICustomer;
 }

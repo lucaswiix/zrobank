@@ -119,8 +119,9 @@ export const AuthService = ({
 
   async function checkAuthToken(
     token: string,
-    { ctx }
+    options?: BaseOptions
   ): Promise<[ICustomer, ApplicationError]> {
+    const { ctx } = options || {};
     if (!token) {
       return [undefined, UNAUTHORIZED_USER()];
     }

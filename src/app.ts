@@ -1,6 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
 import { handler as authHandler } from './components/auth/Handler';
+import { handler as propertyHandler } from './components/property/Handler';
 import GlobalConfig from './config/GlobalConfig';
 import {
   cacheMiddleware,
@@ -26,7 +27,7 @@ export function initApp({ port = GlobalConfig.PORT } = {}) {
     app.use('/api/v1/auth', authHandler());
     // app.use('/api/v1/users', userHandler());
 
-    // app.use('/api/v1/properties', propertyHandler());
+    app.use('/api/v1/properties', propertyHandler());
     // app.use('/api/v1/ratings', ratingHandler());
 
     app.use(errorHandler);

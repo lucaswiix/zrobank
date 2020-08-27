@@ -1,5 +1,7 @@
 import {
   IsEmail,
+  IsLatitude,
+  IsLongitude,
   IsNotEmpty,
   IsOptional,
   MinLength,
@@ -26,6 +28,14 @@ class CustomerValidator implements Partial<ICustomer> {
   })
   @IsNotEmpty()
   password: string;
+
+  @IsNotEmpty()
+  @IsLatitude()
+  latitude: number;
+
+  @IsNotEmpty()
+  @IsLongitude()
+  longitude: number;
 
   @IsOptional()
   created_at: string;

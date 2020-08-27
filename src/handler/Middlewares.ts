@@ -57,6 +57,7 @@ export const authMiddlewares = (authService = AuthService()) => async (
 ) => {
   try {
     const authToken = req?.cookies?.zrobank_access_token_auth;
+    console.log('authtoken', authToken);
     const [user, err] = await authService.checkAuthToken(authToken);
     if (err) {
       const response = buildResponseData({ status: err.status, err });
