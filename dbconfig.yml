@@ -1,0 +1,11 @@
+test:
+  dialect: postgres
+  datasource: port=25432 user=zrobank password=password dbname=zrobank sslmode=disable
+  dir: migrations
+  table: migrations
+
+development:
+  dialect: postgres
+  datasource: host=localhost user=zrobank port=15432 password=password dbname=zrobank sslmode=disable
+  dir: migrations
+  table: migrations

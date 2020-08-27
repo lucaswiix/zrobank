@@ -1,0 +1,2 @@
+CREATE USER zrobank WITH PASSWORD 'password';
+CREATE DATABASE zrobank;
