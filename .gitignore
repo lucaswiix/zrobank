@@ -8,6 +8,7 @@ npm-debug.log
 *.log
 yarn-error.log
 yarn.lock.cached
+pgdata/
 package-lock.json
 .env
 .cache

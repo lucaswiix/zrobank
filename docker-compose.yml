@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  postgres:
+    image: lucaswiix/zrobank-postgres:latest
+    environment:
+      POSTGRES_USER: zrobank
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: zrobank
+    ports:
+      - '5432:5432'
+    volumes:
+      - zrobank-db:/var/lib/postgresql/data
+
+  zrobank-api:
+    image: lucaswiix/zrobank-api:latest
+    environment:
+      PRD_DB_DBNAME: zrobank
+      PRD_DB_USER: zrobank
+      PRD_DB_PASSWORD: password
+      PRD_DB_HOST: postgres
+      PORT: 3000
+      HOST: 0.0.0.0
+      USER_JWT_SECRET: zrosecret
+      USER_JWT_EXPIRATION_TIME: 20160
+      USER_AUTH_JWT_SECRET: authsecret
+      SQL_USER: zrobank
+      SQL_PASSWORD: password
+      SQL_DATABASE: zrobank
+      SQL_HOST: postgres
+      SQL_PORT: 5432
+    depends_on:
+      - postgres
+    ports:
+      - '3000:3000'
+
+volumes:
+  zrobank-db:

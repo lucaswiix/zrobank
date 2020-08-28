@@ -9,3 +9,9 @@ development:
   datasource: host=localhost user=zrobank port=15432 password=password dbname=zrobank sslmode=disable
   dir: migrations
   table: migrations
+
+production:
+  dialect: postgres
+  datasource: host=$PRD_DB_HOST port=5432 user=$PRD_DB_USER password=$PRD_DB_PASSWORD dbname=$PRD_DB_DBNAME sslmode=disable
+  dir: migrations
+  table: migrations
