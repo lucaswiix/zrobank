@@ -10,9 +10,6 @@ CREATE TABLE customer (
   updated_at TIMESTAMP DEFAULT NOW() NOT NULL
 );
 
-
--- GRANT SELECT, UPDATE, DELETE, INSERT ON customer TO zrobank;
-
 -- +migrate Down
 SET SCHEMA 'public';
 DROP TABLE customer;

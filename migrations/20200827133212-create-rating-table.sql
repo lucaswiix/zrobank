@@ -11,9 +11,6 @@ CREATE TABLE rating (
   updated_at TIMESTAMP DEFAULT now() NOT NULL
 );
 
--- GRANT SELECT, UPDATE, DELETE, INSERT ON rating TO zrobank;
--- GRANT USAGE, SELECT ON rating_key_seq TO zrobank;
-
 -- +migrate Down
 SET SCHEMA 'public';
 DROP TABLE rating;
