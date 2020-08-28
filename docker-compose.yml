@@ -12,7 +12,7 @@ services:
       - zrobank-db:/var/lib/postgresql/data
 
   zrobank-api:
-    image: lucaswiix/zrobank-api:latest
+    image: lucaswiix/zrobank-api:migration
     environment:
       PRD_DB_DBNAME: zrobank
       PRD_DB_USER: zrobank

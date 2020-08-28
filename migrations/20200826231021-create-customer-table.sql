@@ -11,7 +11,7 @@ CREATE TABLE customer (
 );
 
 
-GRANT SELECT, UPDATE, DELETE, INSERT ON customer TO zrobank;
+-- GRANT SELECT, UPDATE, DELETE, INSERT ON customer TO zrobank;
 
 -- +migrate Down
 SET SCHEMA 'public';

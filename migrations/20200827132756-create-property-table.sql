@@ -11,8 +11,8 @@ CREATE TABLE property (
   updated_at TIMESTAMP DEFAULT now() NOT NULL
 );
 
-GRANT SELECT, UPDATE, DELETE, INSERT ON property TO zrobank;
-GRANT USAGE, SELECT ON property_key_seq TO zrobank;
+-- GRANT SELECT, UPDATE, DELETE, INSERT ON property TO zrobank;
+-- GRANT USAGE, SELECT ON property_key_seq TO zrobank;
 
 -- +migrate Down
 SET SCHEMA 'public';
