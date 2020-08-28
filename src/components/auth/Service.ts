@@ -21,7 +21,7 @@ import {
   CustomerLogin,
   ResponseCustomerLogin,
 } from './Types';
-import { validateCustomerAuthenticate } from './validation';
+import { validateCustomerAuthenticate } from './Validation';
 
 export type FindByEmail = (email: string) => Promise<ICustomer>;
 
