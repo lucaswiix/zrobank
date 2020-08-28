@@ -39,16 +39,22 @@ http://localhost:3000/api-docs
 ./postgres/run.sh test
 ```
 
-tecnologies used
+## tecnologies used
 
+- postgres
+- jest
 - express
 - typescript
 - sequelize
 - migrations
 - function pattern
 - DDD
+- clean code
 - single element pattern
 - husky pre-push
+- CI
+- docker
+- docker-compose
 
 ## structure folder
 
