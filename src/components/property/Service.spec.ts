@@ -1,15 +1,6 @@
-import uuid from 'uuid';
-import { Context } from '../../common/Types';
-import { ContextLoggerBuild } from '../../log/Logger';
 import { CustomerSeed } from '../customer/Seed';
 import { PropertySeed } from './Seed';
 import { PropertyService } from './Service';
-
-const Logger = ContextLoggerBuild('Auth Service Test');
-
-const ctx: Context = {
-  log: Logger('Test AuthService /', uuid.v1()),
-};
 
 afterEach(() => {
   jest.clearAllMocks();
