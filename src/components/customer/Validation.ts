@@ -9,7 +9,7 @@ import {
   ValidationError,
 } from 'class-validator';
 import { ApplicationError } from '../../error/Types';
-import { INVALID_USER } from './Errors';
+import { INVALID_CUSTOMER } from './Errors';
 import { ICustomer } from './Types';
 
 class CustomerValidator implements Partial<ICustomer> {
@@ -20,7 +20,12 @@ class CustomerValidator implements Partial<ICustomer> {
   name: string;
 
   @IsNotEmpty()
-  @IsEmail()
+  @IsEmail(
+    {},
+    {
+      message: 'O e-mail está inválido.',
+    }
+  )
   email: string;
 
   @MinLength(6, {
@@ -30,11 +35,15 @@ class CustomerValidator implements Partial<ICustomer> {
   password: string;
 
   @IsNotEmpty()
-  @IsLatitude()
+  @IsLatitude({
+    message: 'O latitude está inválida.',
+  })
   latitude: number;
 
   @IsNotEmpty()
-  @IsLongitude()
+  @IsLongitude({
+    message: 'O longitude está inválida.',
+  })
   longitude: number;
 
   @IsOptional()
@@ -55,7 +64,7 @@ export function validateCustomer(
   });
 
   if (errors.length) {
-    return [undefined, INVALID_USER(errors)];
+    return [undefined, INVALID_CUSTOMER(errors)];
   }
 
   return [data, undefined];

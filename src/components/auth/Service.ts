@@ -21,6 +21,7 @@ import {
   CustomerLogin,
   ResponseCustomerLogin,
 } from './Types';
+import { validateCustomerAuthenticate } from './validation';
 
 export type FindByEmail = (email: string) => Promise<ICustomer>;
 
@@ -52,7 +53,13 @@ export const AuthService = ({
     data: CustomerLogin,
     { ctx }
   ): Promise<[ResponseCustomerLogin, ApplicationError]> {
-    const { email, password } = data;
+    const [validatedData, err] = validateCustomerAuthenticate(data);
+
+    if (err) {
+      return [undefined, INVALID_LOGIN];
+    }
+
+    const { email, password } = validatedData;
 
     const res = await userModel.findOne({
       where: {
@@ -113,6 +120,7 @@ export const AuthService = ({
         transaction: options?.transaction,
       }
     );
+    delete created?.password;
 
     return [created, undefined];
   }

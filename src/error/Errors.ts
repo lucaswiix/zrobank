@@ -7,7 +7,6 @@ export enum ErrorCodes {
   INVALID_AUTH = 4,
   DEFAULT_ERROR = 5,
 }
-
 export const INVALID_PARAM = (
   paramName: string,
   paramValue?: string,
