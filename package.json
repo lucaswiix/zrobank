@@ -16,7 +16,7 @@
     "test": "NODE_ENV=test NODE_OPTIONS=--max_old_space_size=6144 jest --forceExit --silent --noStackTrace --maxWorkers=1",
     "test:spec": "NODE_ENV=test NODE_OPTIONS=--max_old_space_size=6144 SKIP_MIGRATION=1 jest --forceExit --silent --noStackTrace --testPathPattern=\".*\\.spec\\.ts\" --maxWorkers=1",
     "test:migrations": "node src/test/setup.js",
-    "build": "yarn format:check && yarn install && rm -rf ./build && mkdir -p ./build && cp -r src dist package.json yarn.lock ./build",
+    "build": "yarn format:check && yarn install && rm -rf ./build && mkdir -p ./build && mkdir -p dist && cp -r src dist package.json yarn.lock ./build",
     "build:ts": "tslint -c tslint.json -p tsconfig.json && tsc",
     "ts:fix": "tslint --fix -c tslint.json -p tsconfig.json 'src/components/**/*{.ts,.tsx}'",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
