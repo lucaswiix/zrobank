@@ -53,32 +53,3 @@ tecnologies used
 ## structure folder
 
 I chose to use single element pattern for this project due to the simplicity of maintenance.
-
-explain:
-📦 zroBank
-┣ 📂src
-┃ ┣ components
-┃ ┃ ┣ property
-┃ ┃ ┃ ┣ Service.ts
-┃ ┃ ┃ ┣ Handler.ts
-┃ ┃ ┃ ┣ Errors.ts
-┃ ┃ ┃ ┣ Model.ts
-┃ ┃ ┃ ┣ Types.ts
-┃ ┃ ┃ ┣ Validation.ts
-┃ ┃ ┃ ┣ Service.spec.ts
-┃ ┃ ┃ ┣ Handler.test.ts
-┃ ┃ ┃ ┗Validation.spec.ts
-┃ ┃ ┃ others...
-┃ ┣ config/
-┃ ┣ error/
-┃ ┣ model/
-┃ ┣ sequelize/
-┃ ┣ ...
-┃ ┣ 📜app.ts
-┃ ┣ index.ts
-┣ 📜.env
-┣ 📜docker-compose.yaml
-┣ 📜Dockerfile
-┣ 📜init.sh
-┣ 📜package.json
-...
