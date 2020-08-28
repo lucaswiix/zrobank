@@ -18,6 +18,9 @@ if (process.env.NODE_ENV === 'test') {
     SQL_DATABASE: 'zrobank',
     SQL_PASSWORD: 'password',
     SQL_HOST: 'localhost',
+    USER_JWT_SECRET: 'zrosecret',
+    USER_JWT_EXPIRATION_TIME: 20160,
+    USER_AUTH_JWT_SECRET: 'authsecret',
   });
 }
 
