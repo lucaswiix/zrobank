@@ -10,8 +10,14 @@ development:
   dir: migrations
   table: migrations
 
-production:
+homologation:
   dialect: postgres
   datasource: host=$PRD_DB_HOST port=5432 user=$PRD_DB_USER password=$PRD_DB_PASSWORD dbname=$PRD_DB_DBNAME sslmode=disable
+  dir: migrations
+  table: migrations
+
+production:
+  dialect: postgres
+  datasource: $DATABASE_URL
   dir: migrations
   table: migrations

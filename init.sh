@@ -1,3 +1,3 @@
 #!/bin/sh
-npm run sqlmigrate:prod
+npm run sqlmigrate:homologation
 npm run start:prod

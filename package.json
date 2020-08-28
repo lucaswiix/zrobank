@@ -9,7 +9,7 @@
   ],
   "scripts": {    
     "sqlmigrate": "./bin/sql-migrate/run.sh",
-    "sqlmigrate:prod": "./bin/sql-migrate/run.sh up --env=production",
+    "sqlmigrate:homolog": "./bin/sql-migrate/run.sh up --env=homologation",
     "run:ts": "node --stack_trace_limit=100 -r trace -r clarify -r ts-node/register/transpile-only",
     "start": "node-dev --no-notify --stack_trace_limit=100 -r trace -r clarify -r ts-node/register/transpile-only src/index.ts app",
     "start:prod": "ENV_FILE_PATH=.env.prod node --stack_trace_limit=100 -r trace -r clarify -r ts-node/register/transpile-only src/index.ts app",
